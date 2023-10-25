@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="mathgame">
 	<schema id="io.github.diego_ivan.mathgame" path="/io/github/diego_ivan/mathgame/">
+	  <key name="max-number" type="d">
+	    <default>15</default>
+	  </key>
+
+	  <key name="include-negatives" type="b">
+	    <default>true</default>
+	  </key>
 	</schema>
 </schemalist>

@@ -5,6 +5,9 @@ mathgame_sources = [
 
   'Operation.vala',
   'Exercise.vala',
+
+  # Services
+  'Services/Settings.vala',
 ]
 
 mathgame_deps = [
