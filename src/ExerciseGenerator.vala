@@ -25,7 +25,8 @@ public class MathGame.ExerciseGenerator {
     }
 
     private Exercise generate_exercise_for_operator (Operator operator) {
-        int left_operand = generate_integer (), right_operand = generate_integer ();
+        int left_operand = generate_integer (operator);
+        int right_operand = generate_integer (operator);
         var operation = new Operation (left_operand, right_operand, operator);
         return new Exercise (operation);
     }
@@ -40,7 +41,7 @@ public class MathGame.ExerciseGenerator {
         GenericArray<int?> factors = null;
 
         do {
-            left_operand = generate_integer ();
+            left_operand = generate_integer (DIVISION);
             factors = get_factors_for (left_operand);
         } while (factors.length <= 2);
         int right_operand = factors[Random.int_range (0, factors.length)];
@@ -70,10 +71,20 @@ public class MathGame.ExerciseGenerator {
         return factors;
     }
 
-    private int generate_integer () {
-        int upper_bound = settings.max_number_addition;
-        int lower_bound = settings.include_negatives ? -upper_bound : 1;
+    private int generate_integer (Operator operator) {
+        int upper_bound = 0;
+        switch (operator) {
+            case ADDITION:
+            case DIVISION:
+            case SUBTRACTION:
+                upper_bound = settings.max_number_addition;
+                break;
+            case MULTIPLICATION:
+                upper_bound = settings.max_number_multiplication;
+                break;
+        }
 
+        int lower_bound = settings.include_negatives ? -upper_bound : 1;
         return Random.int_range (lower_bound, upper_bound + 1);
     }
 }
