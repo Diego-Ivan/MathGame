@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="mathgame">
+	<schema id="io.github.diego_ivan.mathgame" path="/io/github/diego_ivan/mathgame/">
+	</schema>
+</schemalist>

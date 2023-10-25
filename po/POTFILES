@@ -1,0 +1,6 @@
+data/io.github.diego_ivan.mathgame.desktop.in
+data/io.github.diego_ivan.mathgame.metainfo.xml.in
+data/io.github.diego_ivan.mathgame.gschema.xml
+src/main.vala
+src/window.vala
+src/window.ui
