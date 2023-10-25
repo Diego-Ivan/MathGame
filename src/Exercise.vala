@@ -15,4 +15,8 @@ public class MathGame.Exercise : Object {
             return user_input == operation.result;
         }
     }
+
+    public Exercise (Operation operation) {
+        Object (operation: operation);
+    }
 }
