@@ -20,11 +20,22 @@
           </object>
         </child>
         <property name="content">
-          <object class="GtkLabel" id="label">
-            <property name="label">Hello, World!</property>
-            <style>
-              <class name="title-1"/>
-            </style>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="label">
+                <property name="label">Hello, World!</property>
+                <style>
+                  <class name="title-1"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label">Generate Random</property>
+                <signal name="clicked" handler="on_generate_button_clicked"></signal>
+              </object>
+            </child>
           </object>
         </property>
       </object>

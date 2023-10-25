@@ -27,5 +27,12 @@ namespace MathGame {
         public Window (Gtk.Application app) {
             Object (application: app);
         }
+
+        [GtkCallback]
+        private void on_generate_button_clicked () {
+            var generator = new ExerciseGenerator ();
+            Exercise exercise = generator.generate ();
+            label.label = exercise.operation.to_string ();
+        }
     }
 }

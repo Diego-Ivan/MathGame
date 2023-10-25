@@ -46,7 +46,7 @@ public class MathGame.ExerciseGenerator {
         int right_operand = factors[Random.int_range (0, factors.length)];
 
         bool make_negative = Random.boolean ();
-        if (make_negative) {
+        if (make_negative && settings.include_negatives) {
             right_operand = -right_operand;
         }
 

@@ -18,7 +18,7 @@ public sealed class MathGame.Services.Settings : Object {
     private GLib.Settings g_settings = new GLib.Settings ("io.github.diego_ivan.mathgame");
 
     public int max_number_addition { get; set; }
-    public int max_number_mulitplication { get; set; }
+    public int max_number_multiplication { get; set; }
     public bool include_negatives { get; set; }
 
     protected Settings () {
@@ -26,7 +26,7 @@ public sealed class MathGame.Services.Settings : Object {
 
     construct {
         bind ("max-number-addition");
-        bind ("max-number-multplication");
+        bind ("max-number-multiplication");
         bind ("include-negatives");
         g_settings.delay ();
     }
