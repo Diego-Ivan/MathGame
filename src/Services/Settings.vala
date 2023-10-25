@@ -17,16 +17,22 @@ public sealed class MathGame.Services.Settings : Object {
 
     private GLib.Settings g_settings = new GLib.Settings ("io.github.diego_ivan.mathgame");
 
-    public int max_number { get; set; }
+    public int max_number_addition { get; set; }
+    public int max_number_mulitplication { get; set; }
     public bool include_negatives { get; set; }
 
     protected Settings () {
     }
 
     construct {
-        g_settings.bind ("max-number", this, "max-number", DEFAULT);
-        g_settings.bind ("include-negatives", this, "include-negatives", DEFAULT);
+        bind ("max-number-addition");
+        bind ("max-number-multplication");
+        bind ("include-negatives");
         g_settings.delay ();
+    }
+
+    private void bind (string property) {
+        g_settings.bind (property, this, property, DEFAULT);
     }
 
     public void apply () {
