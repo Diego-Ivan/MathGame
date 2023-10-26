@@ -8,52 +8,49 @@
 public class MathGame.ExerciseGenerator {
     private Services.Settings settings = Services.Settings.get_instance ();
 
-    public Exercise generate (Operator? operator = null) {
-        if (operator == null) {
-            operator = (Operator) Random.int_range (0, 4);
-        }
+    public Exercise generate () {
+        var operator = (Operator) Random.int_range (0, 4);
+
+        int left = 0, right = 0;
         switch (operator) {
             case ADDITION:
             case SUBTRACTION:
+                left = generate_integer (settings.max_number_addition);
+                right = generate_integer (settings.max_number_addition);
+                break;
             case MULTIPLICATION:
-                return generate_exercise_for_operator (operator);
+                left = generate_integer (settings.max_number_multiplication);
+                right = generate_integer (settings.max_number_multiplication);
+                break;
             case DIVISION:
-                return generate_division ();
+                generate_division_operands (out left, out right);
+                break;
             default:
                 assert_not_reached ();
         }
-    }
 
-    private Exercise generate_exercise_for_operator (Operator operator) {
-        int left_operand = generate_integer (operator);
-        int right_operand = generate_integer (operator);
-        var operation = new Operation (left_operand, right_operand, operator);
+        var operation = new Operation (left, right, operator);
         return new Exercise (operation);
     }
 
-    private Exercise generate_division () {
+    private void generate_division_operands (out int left, out int right) {
         /*
          * Generating division is a little bit more tricky, as we want it to be an integer division,
          * so first we will look for the factors of a random number and pick one of those
          * as the right hand operand. We will also avoid prime numbers.
          */
-        int left_operand = 0;
+        left = 0;
         GenericArray<int?> factors = null;
-
         do {
-            left_operand = generate_integer (DIVISION);
-            factors = get_factors_for (left_operand);
+            left = generate_integer (settings.max_number_addition);
+            factors = get_factors_for (left);
         } while (factors.length <= 2);
-        int right_operand = factors[Random.int_range (0, factors.length)];
+        right = factors[Random.int_range (0, factors.length)];
 
         bool make_negative = Random.boolean ();
         if (make_negative && settings.include_negatives) {
-            right_operand = -right_operand;
+            right = -right;
         }
-
-        var operation = new Operation (left_operand, right_operand, DIVISION);
-
-        return new Exercise (operation);
     }
 
     private GenericArray<int?> get_factors_for (int number) {
@@ -71,19 +68,7 @@ public class MathGame.ExerciseGenerator {
         return factors;
     }
 
-    private int generate_integer (Operator operator) {
-        int upper_bound = 0;
-        switch (operator) {
-            case ADDITION:
-            case DIVISION:
-            case SUBTRACTION:
-                upper_bound = settings.max_number_addition;
-                break;
-            case MULTIPLICATION:
-                upper_bound = settings.max_number_multiplication;
-                break;
-        }
-
+    private int generate_integer (int upper_bound) {
         int lower_bound = settings.include_negatives ? -upper_bound : 1;
         return Random.int_range (lower_bound, upper_bound + 1);
     }
