@@ -29,7 +29,7 @@ namespace MathGame {
             ActionEntry[] action_entries = {
                 { "about", this.on_about_action },
                 { "preferences", this.on_preferences_action },
-                { "quit", this.quit }
+                { "quit", on_quit_action }
             };
             this.add_action_entries (action_entries, this);
             this.set_accels_for_action ("app.quit", {"<primary>q"});
@@ -42,6 +42,12 @@ namespace MathGame {
                 win = new Window (this);
             }
             win.present ();
+        }
+
+        public void on_quit_action () {
+            var settings = Services.Settings.get_instance ();
+            settings.apply ();
+            quit ();
         }
 
         private void on_about_action () {

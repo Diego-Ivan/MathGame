@@ -10,12 +10,16 @@ mathgame_sources = [
 
   # Services
   'Services/Settings.vala',
+
+  # Views
+  'Views/StartView.vala',
 ]
 
 blueprints = custom_target('blueprints',
   build_always_stale: true,
   input: files(
     'gtk/help-overlay.blp',
+    'gtk/start-view.blp',
     'window.blp',
   ),
   output: '.',

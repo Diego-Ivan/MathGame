@@ -18,22 +18,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-namespace MathGame {
-    [GtkTemplate (ui = "/io/github/diego_ivan/mathgame/window.ui")]
-    public class Window : Adw.ApplicationWindow {
-        [GtkChild]
-        private unowned Gtk.Label label;
+[GtkTemplate (ui = "/io/github/diego_ivan/mathgame/window.ui")]
+public class MathGame.Window : Adw.ApplicationWindow {
+    private Game game = new Game (10);
 
-        private Game game = new Game (10);
+    static construct {
+        typeof (StartView).ensure ();
+    }
 
-        public Window (Gtk.Application app) {
-            Object (application: app);
-        }
-
-        [GtkCallback]
-        private void on_generate_button_clicked () {
-            game.next ();
-            label.label = game.current_exercise.operation.to_string ();
-        }
+    public Window (Gtk.Application app) {
+        Object (application: app);
     }
 }
