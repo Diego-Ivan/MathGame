@@ -6,6 +6,7 @@ mathgame_sources = [
   'Operation.vala',
   'Exercise.vala',
   'ExerciseGenerator.vala',
+  'Game.vala',
 
   # Services
   'Services/Settings.vala',
