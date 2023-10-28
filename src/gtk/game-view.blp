@@ -12,17 +12,19 @@ template $MathGameGameView : Adw.NavigationPage {
     Adw.Clamp {
       Gtk.Box {
         orientation: vertical;
-        spacing: 24;
+        spacing: 48;
+        valign: center;
 
         Gtk.Label exercise_label {
           styles["title-1"]
         }
 
         Gtk.ListBox {
+          styles["boxed-list"]
           Adw.EntryRow input_row {
             title: _("Answer");
             show-apply-button: true;
-            input-purpose: numeric;
+            input-purpose: number;
             changed => $input_validate ();
             apply => $input_submit ();
           }

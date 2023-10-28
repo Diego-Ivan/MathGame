@@ -17,8 +17,17 @@ public class MathGame.StartView : Adw.NavigationPage {
     private unowned Adw.SpinRow rounds_row;
 
     private Services.Settings settings = Services.Settings.get_instance ();
+    public signal void start_request ();
 
     construct {
+        ActionEntry[] action_entries = {
+            { "start", on_start_action }
+        };
+
+        var action_group = new SimpleActionGroup ();
+        action_group.add_action_entries (action_entries, this);
+        insert_action_group ("start-view", action_group);
+
         settings.bind_property ("max-number-addition",
                                 addition_row, "value",
                                 SYNC_CREATE | BIDIRECTIONAL);
@@ -31,5 +40,9 @@ public class MathGame.StartView : Adw.NavigationPage {
         settings.bind_property ("include-negatives",
                                 negatives_row, "active",
                                 SYNC_CREATE | BIDIRECTIONAL);
+    }
+
+    private void on_start_action () {
+        start_request ();
     }
 }

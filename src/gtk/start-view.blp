@@ -22,42 +22,52 @@ template $MathGameStartView : Adw.NavigationPage {
         icon-name: "brain-augemnted-symbolic";
 
         Adw.Clamp {
-          Adw.PreferencesGroup {
-            title: _("Settings");
-            Adw.SpinRow rounds_row {
-              title: _("Number of rounds");
-              adjustment: Adjustment {
-                lower: 5;
-                upper: 200;
-                step-increment: 1;
-                page-increment: 10;
-              };
+          Gtk.Box {
+            orientation: vertical;
+            spacing: 12;
+            Adw.PreferencesGroup {
+              title: _("Settings");
+              Adw.SpinRow rounds_row {
+                title: _("Number of rounds");
+                adjustment: Adjustment {
+                  lower: 5;
+                  upper: 200;
+                  step-increment: 1;
+                  page-increment: 10;
+                };
+              }
+
+              Adw.SpinRow addition_row {
+                title: _("Addition maximum");
+                subtitle: _("The maximum value that an operand can take in addition, subtraction, and division exercises");
+                adjustment: Adjustment {
+                  lower: 5;
+                  upper: 100;
+                  step-increment: 1;
+                  page-increment: 10;
+                };
+              }
+
+              Adw.SpinRow multiplication_row {
+                title: _("Multiplication maximum");
+                subtitle: _("The maximum value that an operand can take in multiplication exercises");
+                adjustment: Adjustment {
+                  lower: 5;
+                  upper: 100;
+                  step-increment: 1;
+                  page-increment: 10;
+                };
+              }
+
+              Adw.SwitchRow negatives_row {
+                title: _("Allow negative values");
+              }
             }
 
-            Adw.SpinRow addition_row {
-              title: _("Addition maximum");
-              subtitle: _("The maximum value that an operand can take in addition, subtraction, and division exercises");
-              adjustment: Adjustment {
-                lower: 5;
-                upper: 100;
-                step-increment: 1;
-                page-increment: 10;
-              };
-            }
-
-            Adw.SpinRow multiplication_row {
-              title: _("Multiplication maximum");
-              subtitle: _("The maximum value that an operand can take in multiplication exercises");
-              adjustment: Adjustment {
-                lower: 5;
-                upper: 100;
-                step-increment: 1;
-                page-increment: 10;
-              };
-            }
-
-            Adw.SwitchRow negatives_row {
-              title: _("Allow negative values");
+            Gtk.Button start_button {
+              styles["pill", "suggested-action"]
+              label: _("Start");
+              action-name: "start-view.start";
             }
           }
         }

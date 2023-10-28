@@ -30,11 +30,16 @@ public class MathGame.GameView : Adw.NavigationPage {
         if (exercises.length >= settings.rounds) {
             end_time = new DateTime.now_local ();
             message ("Game's Done!");
+            foreach (unowned Exercise exercise in exercises) {
+                message (@"Was $(exercise.operation) right? $(exercise.is_correct)");
+                message (@"Your Answer: $(exercise.user_input). Answer: $(exercise.operation.result)");
+            }
             return;
         }
         current_exercise = generator.generate ();
         exercise_label.label = @"$(current_exercise.operation) = ?";
         exercises.add (current_exercise);
+        input_row.text = "";
     }
 
     [GtkCallback]
@@ -42,8 +47,10 @@ public class MathGame.GameView : Adw.NavigationPage {
         int number;
         if (!int.try_parse (input_row.text, out number)) {
             input_row.add_css_class ("error");
+            input_row.show_apply_button = false;
         } else {
             input_row.remove_css_class ("error");
+            input_row.show_apply_button = true;
         }
     }
 

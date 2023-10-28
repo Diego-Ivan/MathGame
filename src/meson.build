@@ -6,7 +6,6 @@ mathgame_sources = [
   'Operation.vala',
   'Exercise.vala',
   'ExerciseGenerator.vala',
-  'Game.vala',
 
   # Services
   'Services/Settings.vala',
@@ -21,6 +20,7 @@ blueprints = custom_target('blueprints',
   input: files(
     'gtk/help-overlay.blp',
     'gtk/start-view.blp',
+    'gtk/game-view.blp',
     'window.blp',
   ),
   output: '.',

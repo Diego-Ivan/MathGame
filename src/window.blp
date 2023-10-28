@@ -4,9 +4,14 @@ using Adw 1;
 template $MathGameWindow : Adw.ApplicationWindow {
   default-width: 600;
   default-height: 300;
-  content: Adw.NavigationView {
+  content: Adw.NavigationView navigation_view {
     $MathGameStartView {
       tag: "start-view";
+      start_request => $on_game_start_request ();
+    }
+
+    $MathGameGameView game_view {
+      tag: "game-view";
     }
   };
 }

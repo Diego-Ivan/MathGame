@@ -20,7 +20,10 @@
 
 [GtkTemplate (ui = "/io/github/diego_ivan/mathgame/window.ui")]
 public class MathGame.Window : Adw.ApplicationWindow {
-    private Game game = new Game (10);
+    [GtkChild]
+    private unowned Adw.NavigationView navigation_view;
+    [GtkChild]
+    private unowned GameView game_view;
 
     static construct {
         typeof (StartView).ensure ();
@@ -28,5 +31,11 @@ public class MathGame.Window : Adw.ApplicationWindow {
 
     public Window (Gtk.Application app) {
         Object (application: app);
+    }
+
+    [GtkCallback]
+    private void on_game_start_request () {
+        navigation_view.push_by_tag ("game-view");
+        game_view.start_game ();
     }
 }
