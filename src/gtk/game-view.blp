@@ -1,0 +1,33 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $MathGameGameView : Adw.NavigationPage {
+  title: _("Game");
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+    }
+
+    Adw.Clamp {
+      Gtk.Box {
+        orientation: vertical;
+        spacing: 24;
+
+        Gtk.Label exercise_label {
+          styles["title-1"]
+        }
+
+        Gtk.ListBox {
+          Adw.EntryRow input_row {
+            title: _("Answer");
+            show-apply-button: true;
+            input-purpose: numeric;
+            changed => $input_validate ();
+            apply => $input_submit ();
+          }
+        }
+      }
+    }
+  }
+}

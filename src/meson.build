@@ -13,6 +13,7 @@ mathgame_sources = [
 
   # Views
   'Views/StartView.vala',
+  'Views/GameView.vala',
 ]
 
 blueprints = custom_target('blueprints',
