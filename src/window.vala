@@ -24,13 +24,42 @@ public class MathGame.Window : Adw.ApplicationWindow {
     private unowned Adw.NavigationView navigation_view;
     [GtkChild]
     private unowned GameView game_view;
+    [GtkChild]
+    private unowned Adw.SpinRow addition_row;
+    [GtkChild]
+    private unowned Adw.SpinRow multiplication_row;
+    [GtkChild]
+    private unowned Adw.SwitchRow negatives_row;
+    [GtkChild]
+    private unowned Adw.SpinRow rounds_row;
 
-    static construct {
-        typeof (StartView).ensure ();
-    }
+    private Services.Settings settings = Services.Settings.get_instance ();
 
     public Window (Gtk.Application app) {
         Object (application: app);
+    }
+
+    construct {
+        ActionEntry[] action_entries = {
+            { "start", on_game_start_request }
+        };
+
+        var action_group = new SimpleActionGroup ();
+        action_group.add_action_entries (action_entries, this);
+        insert_action_group ("start-view", action_group);
+
+        settings.bind_property ("max-number-addition",
+                                addition_row, "value",
+                                SYNC_CREATE | BIDIRECTIONAL);
+        settings.bind_property ("max-number-multiplication",
+                                multiplication_row, "value",
+                                SYNC_CREATE | BIDIRECTIONAL);
+        settings.bind_property ("rounds",
+                                rounds_row, "value",
+                                SYNC_CREATE | BIDIRECTIONAL);
+        settings.bind_property ("include-negatives",
+                                negatives_row, "active",
+                                SYNC_CREATE | BIDIRECTIONAL);
     }
 
     [GtkCallback]

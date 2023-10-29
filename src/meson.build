@@ -11,7 +11,6 @@ mathgame_sources = [
   'Services/Settings.vala',
 
   # Views
-  'Views/StartView.vala',
   'Views/GameView.vala',
 ]
 
@@ -19,7 +18,6 @@ blueprints = custom_target('blueprints',
   build_always_stale: true,
   input: files(
     'gtk/help-overlay.blp',
-    'gtk/start-view.blp',
     'gtk/game-view.blp',
     'window.blp',
   ),
