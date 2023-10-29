@@ -1,0 +1,41 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $MathGameExerciseRow : Adw.PreferencesRow {
+  accessibility {
+    labelled-by: operation_label;
+  }
+  selectable: false;
+
+  Gtk.Box {
+    margin-top: 12;
+    margin-bottom: 12;
+    margin-start: 12;
+    margin-end: 12;
+    orientation: horizontal;
+
+    Gtk.Box {
+      orientation: vertical;
+      spacing: 6;
+      Gtk.Label operation_label {
+        styles["heading"]
+        xalign: 0;
+      }
+
+      Gtk.Label user_label {
+        styles["dim-label", "caption"]
+        xalign: 0;
+      }
+
+      Gtk.Label answer_label {
+        styles["dim-label", "caption"]
+        xalign: 0;
+      }
+    }
+
+    Gtk.Image feedback_icon {
+      halign: end;
+      hexpand: true;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+.correct_answer {
+  color: @success_color;
+}
+
+.wrong_answer {
+  color: @error_color;
+}

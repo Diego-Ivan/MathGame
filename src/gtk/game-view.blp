@@ -9,27 +9,49 @@ template $MathGameGameView : Adw.NavigationPage {
     Adw.HeaderBar {
     }
 
-    Adw.Clamp {
-      Gtk.Box {
-        orientation: vertical;
-        spacing: 48;
-        valign: center;
+    Stack content_stack {
+      StackPage {
+        name: "exercise-view";
+        child: Adw.Clamp {
+          Gtk.Box {
+            orientation: vertical;
+            spacing: 48;
+            valign: center;
 
-        Gtk.Label exercise_label {
-          styles["title-1"]
-        }
+            Gtk.Label exercise_label {
+              styles["title-1"]
+            }
 
-        Gtk.ListBox {
-          styles["boxed-list"]
-          Adw.EntryRow input_row {
-            title: _("Answer");
-            show-apply-button: true;
-            input-purpose: number;
-            changed => $input_validate ();
-            apply => $input_submit ();
+            Gtk.ListBox {
+              styles["boxed-list"]
+              Adw.EntryRow input_row {
+                title: _("Answer");
+                show-apply-button: true;
+                input-purpose: number;
+                apply => $input_submit ();
+              }
+            }
           }
-        }
+        };
       }
+
+      StackPage {
+        name: "results-view";
+        child: ScrolledWindow {
+          propagate-natural-width: true;
+          propagate-natural-height: true;
+
+          Adw.StatusPage results_status {
+            title: _("Your Results");
+
+            Adw.Clamp {
+              Gtk.ListBox exercises_list{
+                styles["boxed-list"]
+              }
+            }
+        }
+      };
     }
+  }
   }
 }
