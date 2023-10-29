@@ -2,8 +2,8 @@ using Gtk 4.0;
 using Adw 1;
 
 template $MathGameWindow : Adw.ApplicationWindow {
-  default-width: 600;
-  default-height: 300;
+  default-width: 490;
+  default-height: 560;
   content: Adw.NavigationView navigation_view {
     Adw.NavigationPage {
       title: _("Math Game");
@@ -24,12 +24,21 @@ template $MathGameWindow : Adw.ApplicationWindow {
 
           Adw.StatusPage {
             title: _("Math Game");
+            description: _("Practice your mental math");
             icon-name: "brain-augemnted-symbolic";
 
             Adw.Clamp {
               Gtk.Box {
                 orientation: vertical;
                 spacing: 12;
+
+                Gtk.Button start_button {
+                  styles["pill", "suggested-action"]
+                  label: _("Start New Game");
+                  halign: center;
+                  clicked => $on_game_start_request ();
+                }
+
                 Adw.PreferencesGroup {
                   title: _("Settings");
                   Adw.SpinRow rounds_row {
@@ -67,12 +76,6 @@ template $MathGameWindow : Adw.ApplicationWindow {
                   Adw.SwitchRow negatives_row {
                     title: _("Allow negative values");
                   }
-                }
-
-                Gtk.Button start_button {
-                  styles["pill", "suggested-action"]
-                  label: _("Start");
-                  clicked => $on_game_start_request ();
                 }
               }
             }

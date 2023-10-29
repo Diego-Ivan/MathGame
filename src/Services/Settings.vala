@@ -20,6 +20,7 @@ public sealed class MathGame.Services.Settings : Object {
     public int max_number_addition { get; set; }
     public int max_number_multiplication { get; set; }
     public bool include_negatives { get; set; }
+    public bool show_timer { get; set; }
     public int rounds { get; set; }
 
     protected Settings () {
@@ -29,6 +30,7 @@ public sealed class MathGame.Services.Settings : Object {
         bind ("max-number-addition");
         bind ("max-number-multiplication");
         bind ("include-negatives");
+        bind ("show-timer");
         bind ("rounds");
         g_settings.delay ();
     }

@@ -10,6 +10,7 @@ mathgame_sources = [
 
   # Services
   'Services/Settings.vala',
+  'Services/Timer.vala',
 
   # Views
   'Views/GameView.vala',

@@ -7,6 +7,9 @@ template $MathGameGameView : Adw.NavigationPage {
   Adw.ToolbarView {
     [top]
     Adw.HeaderBar {
+      title-widget: Gtk.Label time_label {
+        styles["dim-label", "numeric"]
+      };
     }
 
     Stack content_stack {
@@ -45,6 +48,9 @@ template $MathGameGameView : Adw.NavigationPage {
             title: _("Your Results");
 
             Adw.Clamp {
+              margin-start: 12;
+              margin-end: 12;
+              margin-bottom: 24;
               Gtk.ListBox exercises_list{
                 styles["boxed-list"]
               }
